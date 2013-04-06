@@ -1,0 +1,71 @@
+<!DOCTYPE HTML>
+<html>
+  <head><title>SuperPraise</title></head>
+  <body>
+    <canvas id="myCanvas" width="600" height="600" ></canvas>
+    <script>
+      var context = document.getElementById('myCanvas').getContext('2d');
+      
+      var gridWidth = 10;
+      var gridHeight = 10;
+      var totalWidth = 600;
+      var totalHeight = 600;
+      var squareWidth = (totalWidth / gridWidth) - 1;
+      var squareHeight = (totalHeight / gridHeight) - 1;
+      
+      var filledGridX = [];
+      var filledGridY = [];
+      
+      requestAnimationFrame(update);
+      
+      function update() {
+        requestAnimationFrame(update);
+
+        context.lineWidth=1;
+        context.fillStyle="#FFFFFF";
+        context.font="32px sans-serif";
+        //context.fillText(score, 40, 40);
+
+  			context.fillStyle = "rgb(200,0,0)";
+        
+        
+        var left = 0, top = 0;
+        for(var i = 0; i < gridWidth; i++) {
+                					
+         	for(var j = 0; j < gridHeight; j++) {
+         	
+         	   for(var n = 0; n < filledGridX.length; n++) {
+         	   		var clickedGridX = filledGridX[n];
+         	   		var clickedGridY = filledGridY[n];
+								if ( clickedGridX == i && clickedGridY == j) {
+		          		context.fillRect (left, top, squareWidth, squareHeight);								
+								}         	   		
+         	   }
+
+          	context.strokeRect (left, top, squareWidth, squareHeight);          	
+          	
+  					top += squareHeight;
+        	}       
+  				left += squareWidth;  
+  				top = 0;					
+        	
+        }
+      }
+
+      context.canvas.onclick = function(event) {
+        event = event || window.event;
+        var x = event.pageX - context.canvas.offsetLeft;
+        var y = event.pageY - context.canvas.offsetTop;
+        
+        var gridX = Math.floor(x / squareWidth);
+        var gridY = Math.floor(y / squareHeight);
+        
+        console.log("gridX: " + gridX);
+        console.log("gridY: " + gridY);
+        
+        filledGridX.push(gridX);
+        filledGridY.push(gridY);
+      };
+    </script>
+  </body>
+</html>
