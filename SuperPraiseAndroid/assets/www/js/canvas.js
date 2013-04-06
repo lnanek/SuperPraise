@@ -141,8 +141,9 @@ function update() {
 				}
 			} // end if else not filled in
 			
-
-			context.strokeRect(left, top, getSquareWidth(), getSquareHeight());
+			if ( j > 0 ) {
+				context.strokeRect(left, top, getSquareWidth(), getSquareHeight());
+			}
 
 			top += getSquareHeight();
 		} // end for each grid y
