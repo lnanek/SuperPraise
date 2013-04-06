@@ -4,14 +4,13 @@
   <body>
     <canvas id="myCanvas" width="600" height="600" ></canvas>
     <script>
-      var context = document.getElementById('myCanvas').getContext('2d');
+    	var canvas = document.getElementById('myCanvas');
+      var context = canvas.getContext('2d');
       
       var gridWidth = 10;
       var gridHeight = 10;
-      var totalWidth = 600;
-      var totalHeight = 600;
-      var squareWidth = (totalWidth / gridWidth) - 1;
-      var squareHeight = (totalHeight / gridHeight) - 1;
+      var squareWidth = (canvas.width / gridWidth) - 1;
+      var squareHeight = (canvas.height / gridHeight) - 1;
       
       var filledGridX = [];
       var filledGridY = [];
@@ -20,27 +19,21 @@
       
       function update() {
         requestAnimationFrame(update);
-
-        context.lineWidth=1;
-        context.fillStyle="#FFFFFF";
-        context.font="32px sans-serif";
-        //context.fillText(score, 40, 40);
-
-  			context.fillStyle = "rgb(200,0,0)";
         
-        
+        // Clear previously drawn frame.
+        context.clearRect(0, 0, canvas.width, canvas.height);
+
+				// Draw grid.
+  			context.strokeStyle = "#AAAAFF";
+  			context.fillStyle = "#CCCCFF";
         var left = 0, top = 0;
         for(var i = 0; i < gridWidth; i++) {
                 					
          	for(var j = 0; j < gridHeight; j++) {
          	
-         	   for(var n = 0; n < filledGridX.length; n++) {
-         	   		var clickedGridX = filledGridX[n];
-         	   		var clickedGridY = filledGridY[n];
-								if ( clickedGridX == i && clickedGridY == j) {
+								if ( hasGridSquareBeenClicked( i, j ) ) {
 		          		context.fillRect (left, top, squareWidth, squareHeight);								
 								}         	   		
-         	   }
 
           	context.strokeRect (left, top, squareWidth, squareHeight);          	
           	
@@ -50,9 +43,40 @@
   				top = 0;					
         	
         }
+        
+        // Draw calculated size reading.
+        context.lineWidth=1;
+        context.fillStyle="#000000";
+        context.font="32px sans-serif";
+        context.textAlign = 'center';
+        context.fillText("Square units: " + filledGridX.length, canvas.width / 2, canvas.height / 2);
+
+      }
+      
+      function hasGridSquareBeenClicked(gridX, gridY) {
+         	   for(var n = 0; n < filledGridX.length; n++) {
+         	   		var clickedGridX = filledGridX[n];
+         	   		var clickedGridY = filledGridY[n];
+								if ( clickedGridX == gridX && clickedGridY == gridY ) {
+		          		return true;							
+								}         	   		
+         	   }      
+         	   return false;
       }
 
-      context.canvas.onclick = function(event) {
+var mouseDown = 0;
+context.canvas.onmousedown = function() { 
+    mouseDown = 1;
+}
+context.canvas.onmouseup = function() {
+    mouseDown = 0;
+}
+
+      context.canvas.onmousemove = function(event) {
+      	if (!mouseDown) {
+      		return;
+      	}
+      
         event = event || window.event;
         var x = event.pageX - context.canvas.offsetLeft;
         var y = event.pageY - context.canvas.offsetTop;
@@ -63,8 +87,10 @@
         console.log("gridX: " + gridX);
         console.log("gridY: " + gridY);
         
-        filledGridX.push(gridX);
-        filledGridY.push(gridY);
+        if ( !hasGridSquareBeenClicked(gridX, gridY) ) {
+        	filledGridX.push(gridX);
+        	filledGridY.push(gridY);
+        }
       };
     </script>
   </body>
