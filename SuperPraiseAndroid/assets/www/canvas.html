@@ -14,14 +14,28 @@
 		
 		    <div data-role="header" data-id="contentHeader" data-position="fixed">
 			    <a href="index.html" data-icon="home">Home</a>		    
-			  	<h1>Square Footage Calculator</h1>
-				</div>
+			  	<h1>Square Foot Calc</h1>
+			    <a href="#settingPage" data-icon="gear">Settings</a>	
+			</div>
 				
 		    <div data-role="content" style="overflow-x: visible;">  
   	
 			    <!-- TODO draw mode vs. label boxes mode -->
-			  	<!-- TODO show dimensions of boxes along sides -->
 			    <canvas id="myCanvas" width="600" height="400" ></canvas>
+
+  			</div>
+  		</div>
+  		
+		<div data-role="page" id="settingPage">
+		
+		    <div data-role="header" data-id="contentHeader" data-position="fixed">
+			    <a href="index.html" data-icon="home">Home</a>		    
+			  	<h1>Square Foot Calc</h1>
+			    <a href="#mainPage" data-icon="check">OK</a>		    
+			</div>
+				
+		    <div data-role="content" style="overflow-x: visible;">  
+  	
 			  	<form>
 			  		Width:
 			  		<input type="text" id="gridWidthInput" value="10" />
@@ -35,6 +49,7 @@
 			  	</form>
 
   			</div>
+  		</div>
   			
 		<script type="text/javascript" src="jquery.mobile/jquery-1.7.2.min"></script>		
 		<script type="text/javascript" src="js/custom-scripting.js"></script>
