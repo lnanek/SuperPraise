@@ -1,6 +1,5 @@
 var pictureSource; // picture source
 var destinationType; // sets the format of returned value
-var smallImage;
 
 // Wait for Cordova to connect with the device
 //
@@ -11,25 +10,25 @@ document.addEventListener("deviceready", onDeviceReady, false);
 function onDeviceReady() {
 	pictureSource = navigator.camera.PictureSourceType;
 	destinationType = navigator.camera.DestinationType;
-	smallImage = document.getElementById('smallImage');
 }
 
 // Called when a photo is successfully retrieved
 //
 function onPhotoDataSuccess(imageData) {
-		
-	smallImage.style.display = 'block';
-	smallImage.src = "data:image/jpeg;base64," + imageData;
+	addImage("data:image/jpeg;base64," + imageData);
+}
 
+function addImage(src) {
+	var width = ($(window).width() - 40) / 2;
+	var insertion = '<img src="' + src + '" width="' + width + '"/>';	
+	$(".photoDestination").append(insertion);
+	
 }
 
 // Called when a photo is successfully retrieved
 //
 function onPhotoURISuccess(imageURI) {
-
-	smallImage.style.display = 'block';
-	smallImage.src = imageURI;
-
+	addImage(imageURI);
 }
 
 // A button will call this function
