@@ -36,6 +36,7 @@ var gridHeightInput = document.getElementById('gridHeightInput');
 var gridValue = document.getElementById('gridValue');
 var gridUnits = document.getElementById('gridUnits');
 var gridUnitsSquared = document.getElementById('gridUnitsSquared');
+var lastSqFt = -1;
 
 var filledGridX = [];
 var filledGridY = [];
@@ -224,6 +225,10 @@ function update() {
 	var units = filledGridX.length;
 	var unitValue = gridValue.value;
 	var squareUnits = units * unitValue;
+	if ( lastSqFt < 0 || lastSqFt != squareUnits ) {
+		setSqFt(squareUnits);
+		lastSqFt = squareUnits;
+	}
 	context.font = "24px sans-serif";
 	context.textAlign = 'center';
 	context.textBaseline = 'top';
