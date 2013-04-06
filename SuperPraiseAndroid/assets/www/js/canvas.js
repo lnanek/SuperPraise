@@ -47,6 +47,14 @@ function getSquareHeight() {
 	return (canvas.height / gridHeightInput.value) - 1;
 }
 
+function getGridWidth() {
+	return parseInt(gridWidthInput.value);
+}
+
+function getGridHeight() {
+	return parseInt(gridHeightInput.value);
+}
+
 $(document).bind("pageinit", function() {
 
 	var sizedWindowWidth = $(window).width() - 30;
@@ -66,9 +74,9 @@ function update() {
 	context.strokeStyle = "#AAAAFF";
 	context.fillStyle = "#CCCCFF";
 	var left = 0, top = 0;
-	for ( var i = 0; i < gridWidthInput.value; i++) {
+	for ( var i = 0; i < getGridWidth(); i++) {
 
-		for ( var j = 0; j < gridHeightInput.value; j++) {
+		for ( var j = 0; j < getGridHeight(); j++) {
 
 			if (hasGridSquareBeenClicked(i, j)) {
 				context
@@ -97,7 +105,72 @@ function update() {
 
 	context.fillText("Total: " + squareUnits + " sq. " + gridUnits.value,
 			canvas.width / 2, canvas.height / 2);
+}
 
+function ensureBorder() {
+	console.log("ensureBorder()");
+	if (!hasRightBorder()) {
+		gridWidthInput.value = getGridWidth() + 1;
+	}
+	if (!hasBottomBorder()) {
+		gridHeightInput.value = getGridHeight() + 1;
+	}
+	if (!hasLeftBorder()) {
+		gridWidthInput.value = getGridWidth() + 1;
+		moveClickedRight();
+	}
+	if (!hasTopBorder()) {
+		gridHeightInput.value = getGridHeight() + 1;
+		moveClickedDown();
+	}
+}
+
+function hasLeftBorder() {
+	for ( var i = 0; i < getGridHeight(); i++ ) {
+		if ( hasGridSquareBeenClicked(0, i) ) {
+			return false;
+		}
+	}	
+	return true;
+}
+
+function hasRightBorder() {
+	for ( var i = 0; i < getGridHeight(); i++ ) {
+		if ( hasGridSquareBeenClicked(getGridWidth() - 1, i) ) {
+			return false;
+		}
+	}	
+	return true;
+}
+
+function hasTopBorder() {
+	for ( var i = 0; i < getGridWidth(); i++ ) {
+		if ( hasGridSquareBeenClicked(i, 0) ) {
+			return false;
+		}
+	}	
+	return true;
+}
+
+function hasBottomBorder() {
+	for ( var i = 0; i < getGridWidth(); i++ ) {
+		if ( hasGridSquareBeenClicked(i, getGridHeight() - 1) ) {
+			return false;
+		}
+	}	
+	return true;
+}
+
+function moveClickedRight() {
+	for ( var n = 0; n < filledGridX.length; n++) {
+		filledGridX[n]++;
+	}
+}
+
+function moveClickedDown() {
+	for ( var n = 0; n < filledGridY.length; n++) {
+		filledGridY[n]++;
+	}
 }
 
 function hasGridSquareBeenClicked(gridX, gridY) {
@@ -118,6 +191,9 @@ context.canvas.onmousedown = function(event) {
 	fillSquare(event);
 }
 context.canvas.onmouseup = function(event) {
+	if ( mouseDown) {
+		ensureBorder();
+	}
 	mouseDown = 0;
 }
 
