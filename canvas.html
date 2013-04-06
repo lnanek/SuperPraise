@@ -1,18 +1,45 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
-  <head><title>SuperPraise</title></head>
-  <body>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height" />
+
+				<link rel="stylesheet"  href="jquery.mobile/jquery.mobile-1.1.0.css" />
+        
+        <title>SuperPraise</title>        
+    </head>
+    <body>
+		<div data-role="page" id="mainPage">
+		
+		    <div data-role="header" data-id="contentHeader" data-position="fixed">
+			    <a href="index.html" data-icon="home">Home</a>		    
+			  	<h1>SuperPraise</h1>
+				</div>
+				
+		    <div data-role="content">  
+  	
     <!-- TODO draw mode vs. label boxes mode -->
   	<!-- TODO show dimensions of boxes along sides -->
+    <canvas id="myCanvas" width="600" height="600" ></canvas>
   	<form>
   		Width:
   		<input type="text" id="gridWidthInput" value="10" />
   		Height:
-  		<input type="text" id="gridHeightInput" value="10" />			  		
+  		<input type="text" id="gridHeightInput" value="10" />		
+  		Units:	  		
   		<input type="text" id="gridValue" value="3" />
   		<input type="text" id="gridUnits" value="ft." />
   	</form>
-    <canvas id="myCanvas" width="600" height="600" ></canvas>
 		<script type="text/javascript" src="js/canvas.js"></script>
+
+
+  			</div>
+  			
+				<script type="text/javascript" src="jquery.mobile/jquery-1.7.2.min"></script>		
+				<script type="text/javascript" src="js/custom-scripting.js"></script>
+				<script type="text/javascript" src="jquery.mobile/jquery.mobile-1.1.0.js"></script>
+        <script type="text/javascript" src="cordova-2.3.0.js"></script>
+  			
   </body>
 </html>
