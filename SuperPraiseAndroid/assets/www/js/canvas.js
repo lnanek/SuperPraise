@@ -78,9 +78,12 @@ function update() {
 
 		var leftDimensionTotal = 0;
 		var leftDimensionTop = 0;
+		var rightDimensionTotal = 0;
+		var rightDimensionTop = 0;
+		
 		for ( var j = 0; j < getGridHeight(); j++) {
 
-			// If in a building.
+			// If in a building, fill it in.
 			if (hasGridSquareBeenClicked(i, j)) {
 				context.fillStyle = "#CCCCFF";
 				context
@@ -88,6 +91,7 @@ function update() {
 								getSquareHeight());
 			// Otherwise we might draw a dimension here.
 			} else {
+				// Draw left dimension.
 				var leftDimension = hasGridSquareBeenClicked(i + 1, j);
 				if ( leftDimension ) {
 					leftDimensionTotal += parseInt(gridValue.value);
@@ -97,30 +101,53 @@ function update() {
 
 					var nextIsLeftDimension = !hasGridSquareBeenClicked(i, j + 1)
 						&& hasGridSquareBeenClicked(i + 1, j + 1);
-					if ( nextIsLeftDimension ) {
-						
-					} else {
+					if ( !nextIsLeftDimension ) {
 						context.textAlign = 'right';
 						context.textBaseline = 'middle';
 						context.fillStyle = "#000000";
 						context.fillText("" + leftDimensionTotal + " " + gridUnits.value,
 								left + getSquareWidth(), (leftDimensionTop + top + getSquareHeight()) / 2);
+						leftDimensionTotal = 0;
+						leftDimensionTop = 0;	
 					}
 				} else {
 					leftDimensionTotal = 0;
 					leftDimensionTop = 0;					
 				}
-			}
+				// Draw right dimension.
+				var rightDimension = hasGridSquareBeenClicked(i - 1, j);
+				if ( rightDimension ) {
+					rightDimensionTotal += parseInt(gridValue.value);
+					if (!rightDimensionTop) {
+						rightDimensionTop = top;
+					}
+
+					var nextIsRightDimension = !hasGridSquareBeenClicked(i, j + 1)
+						&& hasGridSquareBeenClicked(i - 1, j + 1);
+					if ( !nextIsRightDimension ) {
+						context.textAlign = 'left';
+						context.textBaseline = 'middle';
+						context.fillStyle = "#000000";
+						context.fillText("" + rightDimensionTotal + " " + gridUnits.value,
+								left, (rightDimensionTop + top + getSquareHeight()) / 2);
+						rightDimensionTotal = 0;
+						rightDimensionTop = 0;	
+					}
+				} else {
+					rightDimensionTotal = 0;
+					rightDimensionTop = 0;					
+				}
+			} // end if else not filled in
 			
 
 			context.strokeRect(left, top, getSquareWidth(), getSquareHeight());
 
 			top += getSquareHeight();
-		}
+		} // end for each grid y
 		left += getSquareWidth();
 		top = 0;
 
-	}
+	} // end for each grid x
 
 	// Draw calculated size reading.
 	var units = filledGridX.length;
