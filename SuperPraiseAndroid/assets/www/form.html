@@ -1,253 +1,85 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <meta name="format-detection" content="telephone=no" />
-        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height" />
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="format-detection" content="telephone=no" />
+<meta name="viewport"
+	content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height" />
 
-				<link rel="stylesheet"  href="jquery.mobile/jquery.mobile-1.1.0.css" />
-        
-        <title>Appraise Blaze</title>        
-    </head>
-    <body>
-		<div data-role="page" id="mainPage">
-		
-		    <div data-role="header" data-id="contentHeader" data-position="fixed">
-			    <a href="index.html" data-icon="home">Home</a>
-			  	<h1>Appraisal Checklist</h1>
-				</div>
-				
-		    <div data-role="content">  
-  	
-<form>
+<link rel="stylesheet" href="jquery.mobile/jquery.mobile-1.1.0.css" />
 
-<h2>COMMERCIAL APPRAISAL REVIEW FORM</h2>
-<p>
-The appraisal report which is the subject of this review is briefly identified and described as follows:
-</p><p>
-Name of Project/Property <input name="nameOfProjectOrProperty" type="text" />
-</p><p>
-Location/Legal <input name="locationLegal" type="text" />
-</p><p>
-Type of property <input name="typeOfProperty" type="text" />
-	<fieldset data-role="controlgroup" data-type="horizontal" data-role="fieldcontain">
-	<label><input name="typeOfPropertyExisting" type="checkbox" /> Existing</label>
-	<label><input name="typeOfPropertyProposedConstruction" type="checkbox" /> Proposed Construction</label>
-	</fieldset>
-</p><p>
-Name of Appraiser <input name="nameOfAppraiser" type="text" />
-Telephone <input name="nameOfAppraiserTelephone" type="text" />
-</p><p>
-Address <input name="address" type="text" />
-</p><p>
-Report Addressed to <input name="reportAddressedTo" type="text" />
-Telephone <input name="reportAddressedToTelephone" type="text" />
-</p><p>
-Address <input name="address" type="text" />
-</p><p>
-Type of Appraisal Report 
-	<fieldset data-role="controlgroup" data-role="fieldcontain">
-	<label><input name="typeOfPropertyExisting" type="checkbox" /> Narrative</label>
-	<label><input name="typeOfPropertyProposedConstruction" type="checkbox" /> Printed Form</label>
-	<label><input name="typeOfPropertyProposedConstruction" type="checkbox" /> Other (identify)</label>
-	<input name="nameOfAppraiser" type="text" />
-	</fieldset>
-</p>
+<title>Appraise Blaze</title>
+</head>
+<body>
+	<div data-role="page" id="mainPage">
 
-<h2>Section I - Purpose and Function of Appraisal</h2>
-<p>
-Value Sought 
-	<fieldset data-role="controlgroup" data-role="fieldcontain">
-<label><input name="typeOfPropertyExisting" type="checkbox" /> Market Value</label>
-<label><input name="typeOfPropertyProposedConstruction" type="checkbox" /> Other (identify)</label>
-<input name="nameOfAppraiser" type="text" />
-	</fieldset>
-</p><p>
-Date of value 
-	<fieldset data-role="controlgroup" data-role="fieldcontain">
-<label><input name="typeOfPropertyExisting" type="checkbox" /> Current</label>
-<label><input name="typeOfPropertyExisting" type="checkbox" /> Future</label>
-<label><input name="typeOfPropertyExisting" type="checkbox" /> Past</label>
-	</fieldset>
-</p><p>
-Definitions Given For 
-	<fieldset data-role="controlgroup" data-role="fieldcontain">
-<label><input name="typeOfPropertyExisting" type="checkbox" /> Value Sought</label>
-<label><input name="typeOfPropertyExisting" type="checkbox" /> Interest To Be Valued</label>
-<label><input name="typeOfPropertyExisting" type="checkbox" /> Market Rent</label>
-<label><input name="typeOfPropertyProposedConstruction" type="checkbox" /> Other (identify)</label>
-<input name="nameOfAppraiser" type="text" />
-	</fieldset>
-</p><p>
-Interests Valued 
-	<fieldset data-role="controlgroup" data-role="fieldcontain">
-<label><input name="typeOfPropertyExisting" type="checkbox" /> Fee Simple</label>
-<label><input name="typeOfPropertyExisting" type="checkbox" /> Leased Interest</label>
-<label><input name="typeOfPropertyExisting" type="checkbox" /> Easements</label>
-<label><input name="typeOfPropertyProposedConstruction" type="checkbox" /> Other (identify)</label>
-<input name="nameOfAppraiser" type="text" />
-	</fieldset>
-</p><p>
-Assumptions and Limiting Conditions
-	<fieldset data-role="controlgroup" data-role="fieldcontain">
-<label><input name="typeOfPropertyExisting" type="checkbox" /> Standard</label>
-<label><input name="typeOfPropertyExisting" type="checkbox" /> Consistent with Valuation Process</label>
-<label><input name="typeOfPropertyExisting" type="checkbox" /> Third Party</label>
-<label><input name="typeOfPropertyExisting" type="checkbox" /> Unreasonable or Excessive</label>
-	</fieldset>
-</p><p>
-Real Estate Valued
-	<fieldset data-role="controlgroup" data-role="fieldcontain">
-<label><input name="typeOfPropertyExisting" type="checkbox" /> Land</label>
-<label><input name="typeOfPropertyExisting" type="checkbox" /> Improvements</label>
-<label><input name="typeOfPropertyExisting" type="checkbox" /> Ground Lease</label>
-<label><input name="typeOfPropertyExisting" type="checkbox" /> Personal Property</label>
-<label><input name="typeOfPropertyProposedConstruction" type="checkbox" /> Other (identify)</label>
-<input name="nameOfAppraiser" type="text" />
-	</fieldset>
-</p><p>
-Report Comments
-<input name="nameOfAppraiser" type="text" />
-</p>
+		<div data-role="header" data-id="contentHeader" data-position="fixed">
+			<a href="index.html" data-icon="home">Home</a>
+			<h1>Property Inspection Info</h1>
+		</div>
 
-<h2>Section II - Property Identification, Ownership and Assessment</h2>
+		<div data-role="content">
 
-<p>
-Does the report adequately contain or identify:
-</p><p>
-Property Location/Address
-	<fieldset data-role="controlgroup" data-type="horizontal" data-role="fieldcontain">
-<label><input name="typeOfPropertyExisting" type="checkbox" /> Yes</label>
-<label><input name="typeOfPropertyExisting" type="checkbox" /> No</label>
-<label><input name="typeOfPropertyExisting" type="checkbox" /> N/A</label>
-	</fieldset>
-</p><p>
-Legal Description
-	<fieldset data-role="controlgroup" data-type="horizontal" data-role="fieldcontain">
-<label><input name="typeOfPropertyExisting" type="checkbox" /> Yes</label>
-<label><input name="typeOfPropertyExisting" type="checkbox" /> No</label>
-<label><input name="typeOfPropertyExisting" type="checkbox" /> N/A</label>
-	</fieldset>
-</p><p>
-Real Estate Tax Information
-	<fieldset data-role="controlgroup" data-type="horizontal" data-role="fieldcontain">
-<label><input name="typeOfPropertyExisting" type="checkbox" /> Yes</label>
-<label><input name="typeOfPropertyExisting" type="checkbox" /> No</label>
-<label><input name="typeOfPropertyExisting" type="checkbox" /> N/A</label>
-	</fieldset>
-</p><p>
-Assessments, Bonds, etc.
-	<fieldset data-role="controlgroup" data-type="horizontal" data-role="fieldcontain">
-<label><input name="typeOfPropertyExisting" type="checkbox" /> Yes</label>
-<label><input name="typeOfPropertyExisting" type="checkbox" /> No</label>
-<label><input name="typeOfPropertyExisting" type="checkbox" /> N/A</label>
-	</fieldset>
-</p><p>
-Existence of:
-</p><p>
-Deed Restrictions
-	<fieldset data-role="controlgroup" data-type="horizontal" data-role="fieldcontain">
-<label><input name="typeOfPropertyExisting" type="checkbox" /> Yes</label>
-<label><input name="typeOfPropertyExisting" type="checkbox" /> No</label>
-<label><input name="typeOfPropertyExisting" type="checkbox" /> N/A</label>
-	</fieldset>
-</p><p>
-Covenants, Conditions, Restrictions
-	<fieldset data-role="controlgroup" data-type="horizontal" data-role="fieldcontain">
-<label><input name="typeOfPropertyExisting" type="checkbox" /> Yes</label>
-<label><input name="typeOfPropertyExisting" type="checkbox" /> No</label>
-<label><input name="typeOfPropertyExisting" type="checkbox" /> N/A</label>
-	</fieldset>
-</p><p>
-Moratoriums
-	<fieldset data-role="controlgroup" data-type="horizontal" data-role="fieldcontain">
-<label><input name="typeOfPropertyExisting" type="checkbox" /> Yes</label>
-<label><input name="typeOfPropertyExisting" type="checkbox" /> No</label>
-<label><input name="typeOfPropertyExisting" type="checkbox" /> N/A</label>
-	</fieldset>
-</p><p>
-Owners of Record 
-	<fieldset data-role="controlgroup" data-type="horizontal" data-role="fieldcontain">
-<label><input name="typeOfPropertyExisting" type="checkbox" /> Yes</label>
-<label><input name="typeOfPropertyExisting" type="checkbox" /> No</label>
-<label><input name="typeOfPropertyExisting" type="checkbox" /> N/A</label>
-	</fieldset>
-</p><p>
-History of Ownership 
-	<fieldset data-role="controlgroup" data-type="horizontal" data-role="fieldcontain">
-<label><input name="typeOfPropertyExisting" type="checkbox" /> Yes</label>
-<label><input name="typeOfPropertyExisting" type="checkbox" /> No</label>
-<label><input name="typeOfPropertyExisting" type="checkbox" /> N/A</label>
-	</fieldset>
-</p><p>
-If Applicable to Subject Property:
-</p><p>
-<label>Amount of Purchase Price
-<input name="typeOfPropertyExisting" type="checkbox" /></label>
-<input name="nameOfAppraiser" type="text" value="$" />
-</p><p>
-<label>Pending Sales Price
-<input name="typeOfPropertyExisting" type="checkbox" /></label>
-<input name="nameOfAppraiser" type="text" value="$" />
-</p><p>
-<label>Asking Price
-<input name="typeOfPropertyExisting" type="checkbox" /></label>
-<input name="nameOfAppraiser" type="text" value="$" />
-</p><p>
-<label>Option Price
-<input name="typeOfPropertyExisting" type="checkbox" /></label>
-<input name="nameOfAppraiser" type="text" value="$" />
-</p><p>
-<label>Other
-<input name="typeOfPropertyExisting" type="checkbox" /></label>
-<input name="nameOfAppraiser" type="text" value="$" />
-</p><p>
-Comments
-<input name="nameOfAppraiser" type="text" />
-</p>
+			<form>
 
-<h2>Section III - Location Analysis</h2>
+					<label>Address of Property <input name="addressOfProperty" type="text" /></label>
 
-<!-- TODO more from http://www.narea-assoc.org/documents/CommercialAppraisalReviewFormWeb.pdf -->
+					<label>Date of Inspection <input type="date"
+						name="dateOfInspection" />
+					</label>
 
-<p>Coming Soon!</p>
+					<label> Year Built <input name="typeOfProperty"
+						type="number" />
+					</label>
 
-<h2>Section IV - Property Description</h2>
+					<label class="select" data-role="fieldcontain">Property Type <select
+							name="propertyType">
+								<option value="leisure">Leisure</option>
+								<option value="retail">Retail</option>
+								<option value="office">Office</option>
+								<option value="industrial">Industrial</option>
+								<option value="healthCare">Health Care</option>
+								<option value="multiFamily">Multi-Family</option>
+						</select>
+					</label>
 
-<p>Coming Soon!</p>
+					
+					<fieldset data-role="controlgroup" data-role="fieldcontain">
+						<label>Square Footage<input name="squareFootage"
+							type="number" />+/- Square Feet Total
+						</label>
+					</fieldset>
+					<fieldset data-role="controlgroup" data-role="fieldcontain">
+						<label>Land Area<input name="landArea"
+							type="number" />+/- Square Feet Total
+						</label>
+					</fieldset>
+					<fieldset data-role="controlgroup" data-role="fieldcontain">
+						<label>Rentable Building Area<input name="rentableBuildingArea"
+							type="number" />+/- Square Feet Total
+						</label>
+					</fieldset>
+					
+					<label>Owner of Record <input name="ownerOfRecord" type="text" /></label>
+					<label>Unit Mix <input name="unitMix" type="text" /></label>
 
-<h2>Section V - Highest and Best Use</h2>
+					<label>License Number <input name="licenseNumber" type="text" /></label>
+					<label>Extent of Inspection <input name="extentOfInspection" type="text" /></label>
+					<label>Highest and Best Use <input name="highestAndBestUse" type="text" /></label>
 
-<p>Coming Soon!</p>
+					<div data-role="fieldcontain">
+						<label for="textarea">Comments</label>
+						<textarea cols="40" rows="8" name="comments" id="comments"></textarea>
+					</div>			
 
-<h2>Section VI - Property Valuation</h2>
+			</form>
+		</div>
 
-<p>Coming Soon!</p>
-
-<h2>Section VII - Other Report Requirements</h2>
-
-<p>Coming Soon!</p>
-
-<h2>Section VIII - Final Rating of Appraisal</h2>
-
-<p>Coming Soon!</p>
-
-<h2>Section IX - Reviewer's Conclusions - Recommendations</h2>
-
-<p>Coming Soon!</p>
-
-<p>
-Original Thanks to the National Association of Review Appraisers and Mortgage Underwriters P.O. Box 879, Palm Springs, California,USA.
-</p>
-
-</form>
-  			</div>
-  			
-				<script type="text/javascript" src="jquery.mobile/jquery-1.7.2.min"></script>		
-				<script type="text/javascript" src="js/custom-scripting.js"></script>
-				<script type="text/javascript" src="jquery.mobile/jquery.mobile-1.1.0.js"></script>
-        <script type="text/javascript" src="cordova-2.3.0.js"></script>
-  			
-  </body>
+		<script type="text/javascript" src="jquery.mobile/jquery-1.7.2.min"></script>
+		<script type="text/javascript" src="js/custom-scripting.js"></script>
+		<script type="text/javascript"
+			src="jquery.mobile/jquery.mobile-1.1.0.js"></script>
+		<script type="text/javascript" src="cordova-2.3.0.js"></script>
+</body>
 </html>
 
