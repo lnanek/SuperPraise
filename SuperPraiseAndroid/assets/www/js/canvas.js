@@ -59,7 +59,10 @@ $(document).bind("pageinit", function() {
 
 	var sizedWindowWidth = $(window).width() - 30;
     canvas.width = sizedWindowWidth;
-    
+	context.lineWidth = 1;
+	context.font = "24px sans-serif";
+	context.strokeStyle = "#AAAAFF";
+	
 	requestAnimationFrame(update);
 });
 
@@ -68,21 +71,47 @@ function update() {
 
 	// Clear previously drawn frame.
 	context.clearRect(0, 0, canvas.width, canvas.height);
-	canvas.width = canvas.width;
 
 	// Draw grid.
-	context.strokeStyle = "#AAAAFF";
-	context.fillStyle = "#CCCCFF";
 	var left = 0, top = 0;
 	for ( var i = 0; i < getGridWidth(); i++) {
 
+		var leftDimensionTotal = 0;
+		var leftDimensionTop = 0;
 		for ( var j = 0; j < getGridHeight(); j++) {
 
+			// If in a building.
 			if (hasGridSquareBeenClicked(i, j)) {
+				context.fillStyle = "#CCCCFF";
 				context
 						.fillRect(left, top, getSquareWidth(),
 								getSquareHeight());
+			// Otherwise we might draw a dimension here.
+			} else {
+				var leftDimension = hasGridSquareBeenClicked(i + 1, j);
+				if ( leftDimension ) {
+					leftDimensionTotal += parseInt(gridValue.value);
+					if (!leftDimensionTop) {
+						leftDimensionTop = top;
+					}
+
+					var nextIsLeftDimension = !hasGridSquareBeenClicked(i, j + 1)
+						&& hasGridSquareBeenClicked(i + 1, j + 1);
+					if ( nextIsLeftDimension ) {
+						
+					} else {
+						context.textAlign = 'right';
+						context.textBaseline = 'middle';
+						context.fillStyle = "#000000";
+						context.fillText("" + leftDimensionTotal + " " + gridUnits.value,
+								left + getSquareWidth(), (leftDimensionTop + top + getSquareHeight()) / 2);
+					}
+				} else {
+					leftDimensionTotal = 0;
+					leftDimensionTop = 0;					
+				}
 			}
+			
 
 			context.strokeRect(left, top, getSquareWidth(), getSquareHeight());
 
@@ -94,15 +123,11 @@ function update() {
 	}
 
 	// Draw calculated size reading.
-	context.lineWidth = 1;
-	context.fillStyle = "#000000";
-	context.font = "32px sans-serif";
-	context.textAlign = 'center';
-
 	var units = filledGridX.length;
 	var unitValue = gridValue.value;
 	var squareUnits = units * unitValue;
-
+	context.textAlign = 'center';
+	context.fillStyle = "#000000";
 	context.fillText("Total: " + squareUnits + " sq. " + gridUnits.value,
 			canvas.width / 2, canvas.height / 2);
 }
