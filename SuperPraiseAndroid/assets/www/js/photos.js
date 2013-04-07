@@ -1,62 +1,31 @@
 var pictureSource; // picture source
 var destinationType; // sets the format of returned value
 
-// Wait for Cordova to connect with the device
-//
 document.addEventListener("deviceready", onDeviceReady, false);
 
-// Cordova is ready to be used!
-//
 function onDeviceReady() {
+	console.log("onDeviceReady");
+	
 	pictureSource = navigator.camera.PictureSourceType;
 	destinationType = navigator.camera.DestinationType;
+	
+	$('#uploadingMessage').hide();
 }
 
-// Called when a photo is successfully retrieved
-//
-function onPhotoDataSuccess(imageData) {
-	addImage("data:image/jpeg;base64," + imageData);
-}
-
-function addImage(src) {
+function onPhotoURISuccess(imageURI) {
+	console.log("onPhotoURISuccess");
+	
 	var width = ($(window).width() - 40) / 2;
-	var insertion = '<img src="' + src + '" width="' + width + '"/>';	
+	var insertion = '<img src="' + imageURI + '" width="' + width + '"/>';	
 	$(".photoDestination").append(insertion);
+	
+	uploadPhoto(imageURI);
 	
 }
 
-// Called when a photo is successfully retrieved
-//
-function onPhotoURISuccess(imageURI) {
-	addImage(imageURI);
-}
-
-// A button will call this function
-//
-function capturePhoto() {
-	// Take picture using device camera and retrieve image as base64-encoded
-	// string
-	navigator.camera.getPicture(onPhotoDataSuccess, onFail, {
-		quality : 50,
-		destinationType : destinationType.DATA_URL
-	});
-}
-
-// A button will call this function
-//
-function capturePhotoEdit() {
-	// Take picture using device camera, allow edit, and retrieve image as
-	// base64-encoded string
-	navigator.camera.getPicture(onPhotoDataSuccess, onFail, {
-		quality : 20,
-		allowEdit : true,
-		destinationType : destinationType.DATA_URL
-	});
-}
-
-// A button will call this function
-//
 function getPhoto(source) {
+	console.log("getPhoto");
+	
 	// Retrieve image file location from specified source
 	navigator.camera.getPicture(onPhotoURISuccess, onFail, {
 		quality : 50,
@@ -65,8 +34,49 @@ function getPhoto(source) {
 	});
 }
 
-// Called if something bad happens.
-// 
 function onFail(message) {
+	console.log("onFail");
+	
 	alert('Failed because: ' + message);
+}
+
+function uploadPhoto(imageURI) {
+	console.log("uploadPhoto");
+	
+    var options = new FileUploadOptions();
+    options.fileKey="appraiseblaze_main_media[file]";
+    options.fileName="AppraiseBlaze" + (new Date()) + ".jpg";
+    options.mimeType="image/jpeg";
+
+    var params = {};
+    options.params = params;
+
+    var ft = new FileTransfer();
+    
+    //$( "#popupBasic" ).dialog( "open" );
+	$('#uploadingMessage').show();
+    
+    ft.upload(imageURI, encodeURI("http://appraiseblaze.eu1.frbit.net/app_dev.php/media"), win, fail, options);
+}
+
+function win(r) {
+	console.log("win");
+
+	//$( "#popupBasic" ).dialog( "close" )
+	$('#uploadingMessage').hide();
+	
+    console.log("Code = " + r.responseCode);
+    console.log("Response = " + r.response);
+    console.log("Sent = " + r.bytesSent);
+}
+
+function fail(error) {
+	console.log("fail");
+	
+	//$( "#popupBasic" ).dialog( "close" )
+	('#uploadingMessage').hide();
+	
+    alert("Error uploading (" + error.code + ")");
+    console.log("upload error source " + error.source);
+    console.log("upload error target " + error.target);
 }
