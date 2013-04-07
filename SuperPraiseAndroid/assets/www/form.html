@@ -19,26 +19,39 @@
 		</div>
 
 		<div data-role="content">
+		
+			<div id="loadingAddress">
+				<center>
+				<img src="jquery.mobile/images/ajax-loader.gif" /><br />
+				</center>
+				Loading address of property from web...<br /><br />
+			</div>
 
-			<form action="http://appraiseblaze.eu1.frbit.net/app_dev.php/demo" method="post">
+			<form action="http://appraiseblaze.eu1.frbit.net/app_dev.php/demo" method="post"
+			id="infoForm" >
 
 					<label>Address of Property <input 
 						id="addressOfProperty"
 						name="appraiseblaze_mainbundle_demotype[addressOfProperty]" type="text" /></label>
 
 					<label>Date of Inspection <input type="date"
-						name="appraiseblaze_mainbundle_demotype[dateOfInspection]" />
+						name="appraiseblaze_mainbundle_demotype[dateOfInspection]" 
+						value="2013-04-07"
+						/>
 					</label>
 
-					<label> Year Built <input name="appraiseblaze_mainbundle_demotype[yearBuilt]"
-						type="number" />
+					<label> Year Built <input 
+						name="appraiseblaze_mainbundle_demotype[yearBuilt]"
+						type="number" 
+						value="1980"
+						/>
 					</label>
 
 					<label class="select" data-role="fieldcontain">Property Type <select
 							name="appraiseblaze_mainbundle_demotype[propertyType]">
 								<option value="leisure">Leisure</option>
 								<option value="retail">Retail</option>
-								<option value="office">Office</option>
+								<option selected="selected" value="office">Office</option>
 								<option value="industrial">Industrial</option>
 								<option value="healthCare">Health Care</option>
 								<option value="multiFamily">Multi-Family</option>
@@ -48,35 +61,73 @@
 					
 					<fieldset data-role="controlgroup" data-role="fieldcontain">
 						<label>Square Footage<input name="appraiseblaze_mainbundle_demotype[squareFootage]" id="squareFootage"
-							type="number" />+/- Square Feet Total
+							type="number" 
+							value="2300"
+							/>+/- Square Feet Total
 						</label>
 					</fieldset>
 					<fieldset data-role="controlgroup" data-role="fieldcontain">
 						<label>Land Area<input name="appraiseblaze_mainbundle_demotype[landArea]"
-							type="number" />+/- Square Feet Total
+							type="number" 
+							value="5000"
+							/>+/- Square Feet Total
 						</label>
 					</fieldset>
 					<fieldset data-role="controlgroup" data-role="fieldcontain">
 						<label>Rentable Building Area<input name="appraiseblaze_mainbundle_demotype[rentableBuildingArea]"
-							type="number" />+/- Square Feet Total
+							type="number" 
+							value="2300"
+							/>+/- Square Feet Total
 						</label>
 					</fieldset>
 					
-					<label>Owner of Record <input name="appraiseblaze_mainbundle_demotype[ownerOfRecord]" type="text" /></label>
-					<label>Unit Mix <input name="appraiseblaze_mainbundle_demotype[unitMix]" type="text" /></label>
+					<label>Owner of Record <input 
+						name="appraiseblaze_mainbundle_demotype[ownerOfRecord]" 
+						value="Gina Lujan"
+						type="text" /></label>
+					<label>Unit Mix <input 
+						name="appraiseblaze_mainbundle_demotype[unitMix]" 
+						value="100% Offices"
+						type="text" /></label>
 
-					<label>License Number <input name="appraiseblaze_mainbundle_demotype[licenseNumber]" type="text" /></label>
-					<label>Extent of Inspection <input name="appraiseblaze_mainbundle_demotype[extentOfInspection]" type="text" /></label>
-					<label>Highest and Best Use <input name="appraiseblaze_mainbundle_demotype[highestAndBestUse]" type="text" /></label>
+					<label>License Number <input 
+						name="appraiseblaze_mainbundle_demotype[licenseNumber]" 
+						type="text" 
+						value="13431413-1212L"
+						/></label>
+						
+					<label>Extent of Inspection <input 
+						name="appraiseblaze_mainbundle_demotype[extentOfInspection]" 
+						type="text" 
+						value="Exterior and all internal rooms."
+						/></label>
+					<label>Highest and Best Use <input 
+						name="appraiseblaze_mainbundle_demotype[highestAndBestUse]" 
+						value="The property is already being employed in its best use. Regular customers and meetups mean continue built up advantage would be lost with change."
+						type="text" /></label>
   
 					<div data-role="fieldcontain">
 						<label for="textarea">Comments</label>
-						<textarea cols="40" rows="8" name="appraiseblaze_mainbundle_demotype[comments]" id="comments"></textarea>
+						<textarea 
+							cols="40" 
+							rows="8" 
+							name="appraiseblaze_mainbundle_demotype[comments]" 
+							id="comments"
+							>A popular community meeting and co-working space with a bright future!</textarea>
 					</div>	
 					
+					<div id="sendingInfo">
+						<center>
+						<img src="jquery.mobile/images/ajax-loader.gif" /><br />
+						</center>
+						Sending filled out info to web...<br /><br />
+					</div>
+								
 					<input value="Save" type="submit" />		
 
 			</form>
+			
+			
 		</div>
 
 		<script type="text/javascript" src="jquery.mobile/jquery-1.7.2.min"></script>
