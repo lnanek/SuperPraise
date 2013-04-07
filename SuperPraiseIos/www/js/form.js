@@ -1,0 +1,3 @@
+
+$('#squareFootage').val(getSqFt());
+	
