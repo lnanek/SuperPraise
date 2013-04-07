@@ -40,6 +40,8 @@ function onFail(message) {
 	alert('Failed because: ' + message);
 }
 
+var loadingStatus = 0;
+
 function uploadPhoto(imageURI) {
 	console.log("uploadPhoto");
 	
@@ -53,7 +55,17 @@ function uploadPhoto(imageURI) {
 
     var ft = new FileTransfer();
     
-    //$( "#popupBasic" ).dialog( "open" );
+    loadingStatus = 0;
+    ft.onprogress = function(progressEvent) {
+        if (progressEvent.lengthComputable) {
+            $('#uploadingMessage').html('Uploading... ' 
+            		+ (Math.round(progressEvent.loaded / progressEvent.total) * 100) + '%');
+        } else {
+        	loadingStatus++;
+        	$('#uploadingMessage').html('Uploading... ' + loadingStatus);
+        }
+    };
+    
 	$('#uploadingMessage').show();
     
     ft.upload(imageURI, encodeURI("http://appraiseblaze.eu1.frbit.net/app_dev.php/media"), win, fail, options);
@@ -62,7 +74,6 @@ function uploadPhoto(imageURI) {
 function win(r) {
 	console.log("win");
 
-	//$( "#popupBasic" ).dialog( "close" )
 	$('#uploadingMessage').hide();
 	
     console.log("Code = " + r.responseCode);
@@ -73,7 +84,6 @@ function win(r) {
 function fail(error) {
 	console.log("fail");
 	
-	//$( "#popupBasic" ).dialog( "close" )
 	('#uploadingMessage').hide();
 	
     alert("Error uploading (" + error.code + ")");
