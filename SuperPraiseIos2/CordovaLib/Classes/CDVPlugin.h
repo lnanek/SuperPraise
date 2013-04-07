@@ -30,7 +30,7 @@
 
 @interface CDVPlugin : NSObject {}
 
-@property (nonatomic, weak) UIWebView* webView;
+@property (nonatomic, strong) UIWebView* webView;
 @property (nonatomic, weak) UIViewController* viewController;
 @property (nonatomic, weak) id <CDVCommandDelegate> commandDelegate;
 

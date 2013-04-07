@@ -60,10 +60,12 @@ function getGridHeight() {
 $(document).bind("pageinit", function() {
 
 	var sizedWindowWidth = $(window).width() - 30;
-    canvas.width = sizedWindowWidth;
+	canvas.width = sizedWindowWidth;
 	context.lineWidth = 1;
 	context.strokeStyle = "#AAAAFF";
-	
+
+    $('#uploadingMessage').hide();
+
 	requestAnimationFrame(update);
 });
 
@@ -82,7 +84,7 @@ function update() {
 		var leftDimensionTop = 0;
 		var rightDimensionTotal = 0;
 		var rightDimensionTop = 0;
-		
+
 		for ( var j = 0; j < getGridHeight(); j++) {
 
 			// If in a building, fill it in.
@@ -91,58 +93,65 @@ function update() {
 				context
 						.fillRect(left, top, getSquareWidth(),
 								getSquareHeight());
-			// Otherwise we might draw a dimension here.
+				// Otherwise we might draw a dimension here.
 			} else {
 				// Draw left dimension.
 				var leftDimension = hasGridSquareBeenClicked(i + 1, j);
-				if ( leftDimension ) {
+				if (leftDimension) {
 					leftDimensionTotal += parseInt(gridValue.value);
 					if (!leftDimensionTop) {
 						leftDimensionTop = top;
 					}
 
-					var nextIsLeftDimension = !hasGridSquareBeenClicked(i, j + 1)
-						&& hasGridSquareBeenClicked(i + 1, j + 1);
-					if ( !nextIsLeftDimension ) {
+					var nextIsLeftDimension = !hasGridSquareBeenClicked(i,
+							j + 1)
+							&& hasGridSquareBeenClicked(i + 1, j + 1);
+					if (!nextIsLeftDimension) {
 						context.textAlign = 'right';
 						context.textBaseline = 'middle';
 						context.fillStyle = "#000000";
-						context.fillText("" + leftDimensionTotal + "" + gridUnits.value,
-								left + getSquareWidth(), (leftDimensionTop + top + getSquareHeight()) / 2);
+						context
+								.fillText("" + leftDimensionTotal + ""
+										+ gridUnits.value, left
+										+ getSquareWidth(), (leftDimensionTop
+										+ top + getSquareHeight()) / 2);
 						leftDimensionTotal = 0;
-						leftDimensionTop = 0;	
+						leftDimensionTop = 0;
 					}
 				} else {
 					leftDimensionTotal = 0;
-					leftDimensionTop = 0;					
+					leftDimensionTop = 0;
 				}
 				// Draw right dimension.
 				var rightDimension = hasGridSquareBeenClicked(i - 1, j);
-				if ( rightDimension ) {
+				if (rightDimension) {
 					rightDimensionTotal += parseInt(gridValue.value);
 					if (!rightDimensionTop) {
 						rightDimensionTop = top;
 					}
 
-					var nextIsRightDimension = !hasGridSquareBeenClicked(i, j + 1)
-						&& hasGridSquareBeenClicked(i - 1, j + 1);
-					if ( !nextIsRightDimension ) {
+					var nextIsRightDimension = !hasGridSquareBeenClicked(i,
+							j + 1)
+							&& hasGridSquareBeenClicked(i - 1, j + 1);
+					if (!nextIsRightDimension) {
 						context.textAlign = 'left';
 						context.textBaseline = 'middle';
 						context.fillStyle = "#000000";
-						context.fillText("" + rightDimensionTotal + "" + gridUnits.value,
-								left, (rightDimensionTop + top + getSquareHeight()) / 2);
+						context.fillText("" + rightDimensionTotal + ""
+								+ gridUnits.value, left, (rightDimensionTop
+								+ top + getSquareHeight()) / 2);
 						rightDimensionTotal = 0;
-						rightDimensionTop = 0;	
+						rightDimensionTop = 0;
 					}
 				} else {
 					rightDimensionTotal = 0;
-					rightDimensionTop = 0;					
+					rightDimensionTop = 0;
 				}
 			} // end if else not filled in
-			
-			if ( j > 0 ) {
-				context.strokeRect(left, top, getSquareWidth(), getSquareHeight());
+
+			if (j > 0) {
+				context.strokeRect(left, top, getSquareWidth(),
+						getSquareHeight());
 			}
 
 			top += getSquareHeight();
@@ -151,82 +160,87 @@ function update() {
 		top = 0;
 
 	} // end for each grid x
-	
+
 	// Draw top and bottom dimensions.
 	var left = 0, top = 0;
-	for ( var j = 0; j < getGridHeight(); j++) {	
-		
+	for ( var j = 0; j < getGridHeight(); j++) {
+
 		var topDimensionTotal = 0;
 		var topDimensionLeft = 0;
 		var bottomDimensionTotal = 0;
 		var bottomDimensionLeft = 0;
-		
+
 		for ( var i = 0; i < getGridWidth(); i++) {
 
 			// If in a building, filled in.
-			// Otherwise we might draw a dimension here.			
+			// Otherwise we might draw a dimension here.
 			if (!hasGridSquareBeenClicked(i, j)) {
 				// Draw top dimension.
 				var topDimension = hasGridSquareBeenClicked(i, j + 1);
-				if ( topDimension ) {
+				if (topDimension) {
 					topDimensionTotal += parseInt(gridValue.value);
 					if (!topDimensionLeft) {
 						topDimensionLeft = left;
 					}
 
 					var nextIsTopDimension = !hasGridSquareBeenClicked(i + 1, j)
-						&& hasGridSquareBeenClicked(i + 1, j + 1);
-					if ( !nextIsTopDimension ) {
+							&& hasGridSquareBeenClicked(i + 1, j + 1);
+					if (!nextIsTopDimension) {
 						context.textAlign = 'center';
 						context.textBaseline = 'bottom';
 						context.fillStyle = "#000000";
-						context.fillText("" + topDimensionTotal + "" + gridUnits.value,
-								(topDimensionLeft + left + getSquareWidth()) / 2, top + getSquareHeight());
+						context
+								.fillText("" + topDimensionTotal + ""
+										+ gridUnits.value, (topDimensionLeft
+										+ left + getSquareWidth()) / 2, top
+										+ getSquareHeight());
 						topDimensionTotal = 0;
-						topDimensionLeft = 0;	
+						topDimensionLeft = 0;
 					}
 				} else {
 					topDimensionTotal = 0;
-					topDimensionLeft = 0;					
+					topDimensionLeft = 0;
 				}
 				// Draw bottom dimension.
 				var bottomDimension = hasGridSquareBeenClicked(i, j - 1);
-				if ( bottomDimension ) {
+				if (bottomDimension) {
 					bottomDimensionTotal += parseInt(gridValue.value);
 					if (!bottomDimensionLeft) {
 						bottomDimensionLeft = left;
 					}
 
-					var nextIsBottomDimension = !hasGridSquareBeenClicked(i + 1, j)
-						&& hasGridSquareBeenClicked(i + 1, j - 1);
-					if ( !nextIsBottomDimension ) {
+					var nextIsBottomDimension = !hasGridSquareBeenClicked(
+							i + 1, j)
+							&& hasGridSquareBeenClicked(i + 1, j - 1);
+					if (!nextIsBottomDimension) {
 						context.textAlign = 'center';
 						context.textBaseline = 'top';
 						context.fillStyle = "#000000";
-						context.fillText("" + bottomDimensionTotal + "" + gridUnits.value,
-								(bottomDimensionLeft + left + getSquareWidth()) / 2, top);
+						context
+								.fillText("" + bottomDimensionTotal + ""
+										+ gridUnits.value, (bottomDimensionLeft
+										+ left + getSquareWidth()) / 2, top);
 						bottomDimensionTotal = 0;
-						bottomDimensionLeft = 0;	
+						bottomDimensionLeft = 0;
 					}
 				} else {
 					bottomDimensionTotal = 0;
-					bottomDimensionLeft = 0;					
+					bottomDimensionLeft = 0;
 				}
 			} // end if else not filled in
-			
+
 			left += getSquareWidth();
 		} // end for each grid c
 		top += getSquareHeight();
 		left = 0;
 
-	} // end for each grid y	
-	
+	} // end for each grid y
 
 	// Draw calculated size reading.
 	var units = filledGridX.length;
 	var unitValue = gridValue.value;
 	var squareUnits = units * unitValue;
-	if ( lastSqFt < 0 || lastSqFt != squareUnits ) {
+	if (lastSqFt < 0 || lastSqFt != squareUnits) {
 		setSqFt(squareUnits);
 		lastSqFt = squareUnits;
 	}
@@ -261,41 +275,41 @@ function ensureBorder() {
 }
 
 function hasLeftBorder() {
-	for ( var i = 0; i < getGridHeight(); i++ ) {
-		if ( hasGridSquareBeenClicked(0, i) ) {
+	for ( var i = 0; i < getGridHeight(); i++) {
+		if (hasGridSquareBeenClicked(0, i)) {
 			return false;
 		}
-	}	
+	}
 	return true;
 }
 
 function hasRightBorder() {
-	for ( var i = 0; i < getGridHeight(); i++ ) {
-		if ( hasGridSquareBeenClicked(getGridWidth() - 1, i) ) {
+	for ( var i = 0; i < getGridHeight(); i++) {
+		if (hasGridSquareBeenClicked(getGridWidth() - 1, i)) {
 			return false;
 		}
-	}	
+	}
 	return true;
 }
 
 function hasTopBorder() {
-	for ( var i = 0; i < getGridWidth(); i++ ) {
-		if ( hasGridSquareBeenClicked(i, 0) ) {
+	for ( var i = 0; i < getGridWidth(); i++) {
+		if (hasGridSquareBeenClicked(i, 0)) {
 			return false;
 		}
-		if ( hasGridSquareBeenClicked(i, 1) ) {
+		if (hasGridSquareBeenClicked(i, 1)) {
 			return false;
 		}
-	}	
+	}
 	return true;
 }
 
 function hasBottomBorder() {
-	for ( var i = 0; i < getGridWidth(); i++ ) {
-		if ( hasGridSquareBeenClicked(i, getGridHeight() - 1) ) {
+	for ( var i = 0; i < getGridWidth(); i++) {
+		if (hasGridSquareBeenClicked(i, getGridHeight() - 1)) {
 			return false;
 		}
-	}	
+	}
 	return true;
 }
 
@@ -324,20 +338,20 @@ function hasGridSquareBeenClicked(gridX, gridY) {
 
 var mouseDown = 0;
 
-$(canvas).bind('vmouseup', function (event) {
-	if ( mouseDown) {
+$(canvas).bind('vmouseup', function(event) {
+	if (mouseDown) {
 		ensureBorder();
 	}
 	mouseDown = 0;
 });
 
-$(canvas).bind('vmousedown', function (event) {
+$(canvas).bind('vmousedown', function(event) {
 	mouseDown = 1;
 
 	fillSquare(event);
 });
 
-$(canvas).bind('vmousemove', function (event) {
+$(canvas).bind('vmousemove', function(event) {
 	if (!mouseDown) {
 		return;
 	}
@@ -363,3 +377,75 @@ function fillSquare(event) {
 	}
 
 }
+
+function uploadSketch() {
+
+	window.plugins.screenshot.saveScreenshot();
+
+	
+    if ( 'Android' == device.platform ) {
+        console.log('Uploading saved sketch from Android.');
+        
+        $('#uploadingMessage').show();
+
+        // TODO wait for return properly.
+        setTimeout(function() {
+                   uploadPhoto("file:///mnt/sdcard/Pictures/AppraiseBlaze.png");
+                   },5000);
+    } else {
+        console.log('Uploading not supported.');
+    }
+	 
+}
+
+
+var loadingStatus = 0;
+
+function uploadPhoto(imageURI) {
+	console.log("uploadPhoto");
+	
+    var options = new FileUploadOptions();
+    options.fileKey="appraiseblaze_main_media[file]";
+    options.fileName="AppraiseBlaze" + (new Date()) + ".jpg";
+    options.mimeType="image/jpeg";
+
+    var params = {};
+    options.params = params;
+
+    var ft = new FileTransfer();
+    
+    loadingStatus = 0;
+    ft.onprogress = function(progressEvent) {
+        if (progressEvent.lengthComputable) {
+            $('#uploadingMessage').html('Uploading... ' 
+            		+ (Math.round(progressEvent.loaded / progressEvent.total) * 100) + '%');
+        } else {
+        	loadingStatus++;
+        	$('#uploadingMessage').html('Uploading... ' + loadingStatus);
+        }
+    };
+    
+    
+    ft.upload(imageURI, encodeURI("http://appraiseblaze.eu1.frbit.net/app_dev.php/media"), win, fail, options);
+}
+
+function win(r) {
+	console.log("win");
+
+	$('#uploadingMessage').hide();
+	
+    console.log("Code = " + r.responseCode);
+    console.log("Response = " + r.response);
+    console.log("Sent = " + r.bytesSent);
+}
+
+function fail(error) {
+	console.log("fail");
+	
+	('#uploadingMessage').hide();
+	
+    alert("Error uploading (" + error.code + ")");
+    console.log("upload error source " + error.source);
+    console.log("upload error target " + error.target);
+}
+
