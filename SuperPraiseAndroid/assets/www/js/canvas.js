@@ -323,25 +323,27 @@ function hasGridSquareBeenClicked(gridX, gridY) {
 }
 
 var mouseDown = 0;
-context.canvas.onmousedown = function(event) {
-	mouseDown = 1;
 
-	fillSquare(event);
-}
-context.canvas.onmouseup = function(event) {
+$(canvas).bind('vmouseup', function (event) {
 	if ( mouseDown) {
 		ensureBorder();
 	}
 	mouseDown = 0;
-}
+});
 
-context.canvas.onmousemove = function(event) {
+$(canvas).bind('vmousedown', function (event) {
+	mouseDown = 1;
+
+	fillSquare(event);
+});
+
+$(canvas).bind('vmousemove', function (event) {
 	if (!mouseDown) {
 		return;
 	}
 
 	fillSquare(event);
-};
+});
 
 function fillSquare(event) {
 
