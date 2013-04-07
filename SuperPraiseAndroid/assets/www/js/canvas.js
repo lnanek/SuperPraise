@@ -64,6 +64,8 @@ $(document).bind("pageinit", function() {
 	context.lineWidth = 1;
 	context.strokeStyle = "#AAAAFF";
 
+    $('#uploadingMessage').hide();
+
 	requestAnimationFrame(update);
 });
 
@@ -380,12 +382,19 @@ function uploadSketch() {
 
 	window.plugins.screenshot.saveScreenshot();
 
-	$('#uploadingMessage').show();
 	
-	// TODO wait for return properly.
-	setTimeout(function() {
-		uploadPhoto("file:///mnt/sdcard/Pictures/AppraiseBlaze.png");
-	},5000);
+    if ( 'Android' == device.platform ) {
+        console.log('Uploading saved sketch from Android.');
+        
+        $('#uploadingMessage').show();
+
+        // TODO wait for return properly.
+        setTimeout(function() {
+                   uploadPhoto("file:///mnt/sdcard/Pictures/AppraiseBlaze.png");
+                   },5000);
+    } else {
+        console.log('Uploading not supported.');
+    }
 	 
 }
 
@@ -440,39 +449,3 @@ function fail(error) {
     console.log("upload error target " + error.target);
 }
 
-/*
-function uploadSketch() {
-	var xhr = new XMLHttpRequest();
-	var fileUpload = xhr.upload;
-	var boundary = 'multipartformboundary' + (new Date).getTime();
-
-	fileUpload.addEventListener("load", function(ajax) {
-		console.debug(ajax); // getting the response
-	}, false);
-
-	xhr.open("POST", "http://appraiseblaze.eu1.frbit.net/app_dev.php/media",
-			true);
-	xhr.setRequestHeader('content-type', 'multipart/form-data; boundary='
-			+ boundary);
-
-	builder = '--'
-			+ boundary
-			+ '\r\n Content-Disposition: form-data; name="appraiseblaze_main_media[file]"; filename="upload.png"\r\n Content-Type: image/png \r\n\r\n';
-	builder += (canvas.toDataURL('image/png').split(","))[1];
-
-	builder += '\r\n--' + boundary + '--\r\n';
-
-	xhr.onreadystatechange = function() {
-		if (xhr.readyState == 4) {
-			if (xhr.status == 200)
-				alert("URL Exists!")
-			else if (xhr.status == 404)
-				alert("URL doesn't exist!")
-			else
-				alert("Status is " + xhr.status)
-		}
-	}
-	xhr.send(builder);
-
-}
-*/
